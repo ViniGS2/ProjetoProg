@@ -118,13 +118,14 @@ public class TelaInicial {
         library.removeBook(titulo);
     }
 
-    public void verificarLogin(String email, String senha, String conta) {
+    public void verificarLogin(String email, String senha) {
         boolean logado = library.isLogged(email, senha);
+        System.out.println(library.getCurrentUser().accountType());
         if (!logado) {
             JOptionPane.showMessageDialog(null, "Email ou senha incorretos.");
         } else{
             JOptionPane.showMessageDialog(null, "Olá, "+library.getCurrentUser().getName()+"! O que deseja fazer? ");
-            if(conta.equals("cliente")) {
+            if(verificarTipoConta().equals("client")) {
                 TelaCliente telaCliente = new TelaCliente();
                 JFrame janela = new JFrame("Biblioteca");
                 janela.setContentPane(telaCliente.getTelaCliente());
@@ -141,6 +142,10 @@ public class TelaInicial {
                 janela.setVisible(true);
             }
         }
+    }
+
+    public String verificarTipoConta() {
+        return library.getCurrentUser().accountType();
     }
 
     public JPanel getPanelPrinc() {
