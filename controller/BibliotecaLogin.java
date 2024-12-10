@@ -12,31 +12,22 @@ public class BibliotecaLogin extends TelaInicial {
     private JTextField inserirSenha;
     private JPanel painelPrinc;
     private JButton entrar;
-    private JTextArea tipoContaArea;
-    private JTextField tipoConta;
 
     public BibliotecaLogin() {
         loginArea.setText("Login de Usuário");
         emailArea.setText("Inserir E-mail:");
         senhaArea.setText("Inserir Senha:");
         entrar.setText("Entrar");
-        tipoContaArea.setText("Inserir o tipo de conta:");
         entrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String email = inserirEmail.getText();
                 String senha = inserirSenha.getText();
-                String conta = tipoConta.getText();
-                if(conta.equalsIgnoreCase("cliente")||conta.equalsIgnoreCase("funcionario")||conta.equalsIgnoreCase("funcionário")){
-                    if(conta.equals("funcionário")){
-                        verificarLogin(email, senha, "funcionario");
-                    }
-                    else{
-                        verificarLogin(email, senha, conta);
-                    }
-                }
-                else{
+                if(email.isEmpty() || senha.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Preencha corretamente os campos de login");
+                }
+                else {
+                    verificarLogin(email, senha);
                 }
             }
         });
